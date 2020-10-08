@@ -1,0 +1,54 @@
+server:
+  port: 7031
+management:
+  port: 7012
+  add-application-context-header: false
+  security:
+    enabled: false
+#去哪儿找配置文件，只能写在bootstrap里（比application先加载）
+#git里配置文件为${spring.application.name}-${spring.cloud.config.profile}.properties
+#profile类型
+spring:
+  application:
+    name: com.shuyuan.judd.notify
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    config:
+      profile: dev
+      label: dev #分支
+      discovery:
+        enabled: true
+        serviceId: com.shuyuan.judd.eureka
+
+
+
+endpoints:
+  shutdown:
+    enabled: true
+    sensitive: false
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:1111/eureka/
+    healthcheck:
+      enabled: false
+    #Indicates how often(in seconds) to fetch the registry information from the eureka server.
+    registry-fetch-interval-seconds: 60
+    initial-instance-info-replication-interval-seconds: 5
+    eureka-service-url-poll-interval-seconds: 50
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+    #此配置建议只试用开发和测试环境
+    #心跳间隔时间,默认是30秒
+    lease-renewal-interval-in-seconds: 600
+    #最后一次心跳时间后leaseExpirationDurationInSeconds秒就认为是下线了，默认是90秒
+    lease-expiration-duration-in-seconds: 1800
+
+
+
+
+
+
