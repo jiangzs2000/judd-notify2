@@ -89,7 +89,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
                 <configuration>
-                    <mainClass>com.shuyuan.judd.fundation.FoundationApplication</mainClass>
+                    <mainClass>com.shuyuan.judd.notify.NotifyApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>
